@@ -9,18 +9,6 @@ format:
   warwickpres-revealjs: default
 ---
 
-:::: {.columns}
-
-::: {.column width="30%"}
-contents
-:::
-
-::: {.column width="70%"}
-contents
-:::
-
-::::
-
 ## The R Project
 
 :::: {.columns}
@@ -60,19 +48,143 @@ NEED CONTRIBUTOR PLOT
 
 Diversity among maintainers of R packages on the CRAN repository
 
+```{r}
+#| label: libraries
+library(readr)
+library(ggplot2)
+library(ggtext)
+library(warwickplots)
+```
+
+
+```{r}
+#| label: pinto-plot-setup
+#| echo: false
+
+# these data frames are created in "R/demographics.R"
+gender_perc <- read_csv("data/gender_perc.csv", show_col_types = FALSE)
+loc_perc <- read_csv("data/loc_perc.csv", show_col_types = FALSE)
+
+# colour for plot fill
+aubergine <- warwick_palettes$aubergine[1]
+```
+
 :::: {.columns}
 
 ::: {.column width="50%"}
-GENDER PLOT
+
+```{r}
+#| echo: false
+ggplot(gender_perc, aes(x = reorder(gender, -perc), y = perc)) +
+    geom_col(fill = aubergine) +
+    geom_text(aes(label = paste0(perc, '%')), vjust = -0.45, size = 5) +
+    labs(title = 'Percent of respondents by self-identified gender') +
+    ylim(c(0,95)) +
+    warwickplots:::theme_warwick(base_size = 12) +
+    theme(plot.title = element_textbox_simple(size = rel(1.6)),
+           axis.title.x = element_blank(),
+          axis.title.y = element_blank(),
+          axis.text.y = element_blank(),
+          panel.grid.minor = element_blank(),
+          panel.grid.major.x = element_blank())
+```
+
+
 :::
 
 ::: {.column width="50%"}
-LOCATION PLOT
+
+```{r}
+#| echo: false
+ggplot(loc_perc, aes(x = reorder(location2, -perc), y = perc)) +
+  geom_col(fill = aubergine) +
+  geom_text(aes(label = paste0(perc, '%')), vjust = -0.45, size = 5) +
+  labs(title = 'Percent of respondents by self-identified region') +
+  ylim(c(0,55)) +
+  warwickplots:::theme_warwick(base_size = 12) +
+  theme(plot.title = element_textbox_simple(size = rel(1.6)),
+    axis.title.x = element_blank(),
+        axis.title.y = element_blank(),
+        axis.text.y = element_blank(),
+        panel.grid.minor = element_blank(),
+        panel.grid.major.x = element_blank())
+```
+
+
 :::
 
 ::::
 
 [Data source: Pinto et al. 2018, DOI: [10.1109/SANER.2018.8330263](https://ieeexplore.ieee.org/document/8330263)]{.smaller70}
+
+## Equality, Diversity & Inclusion (EDI)
+
+Diversity among maintainers of R packages on the CRAN repository
+
+```{r}
+library(readr)
+library(ggplot2)
+library(ggtext)
+library(warwickplots)
+```
+
+
+```{r}
+#| echo: false
+
+# these data frames are created in "figures/demographics.R"
+gender_perc <- read_csv("data/gender_perc.csv", show_col_types = FALSE)
+loc_perc <- read_csv("data/loc_perc.csv", show_col_types = FALSE)
+
+# colour for plot fill
+aubergine <- warwick_palettes$aubergine[1]
+```
+
+:::: {.columns}
+
+::: {.column width="50%"}
+```{r}
+#| echo: false
+ggplot(gender_perc, aes(y = reorder(gender, perc), x = perc)) +
+    geom_col(fill = aubergine) +
+    geom_text(aes(label = paste0(perc, '%')), hjust = -0.3, size = 5) +
+    labs(title = 'Percent of respondents by self-identified gender') +
+    xlim(c(0,100)) +
+    warwickplots:::theme_warwick(base_size = 14) +
+    theme(axis.title.x = element_blank(),
+          axis.title.y = element_blank(),
+          axis.text.x = element_blank(),
+          axis.text.y = element_text(size = 14),
+          panel.grid.minor = element_blank(),
+          panel.grid.major.y = element_blank())
+```
+
+
+:::
+
+::: {.column width="50%"}
+```{r}
+#| echo: false
+ggplot(loc_perc, aes(y = reorder(location2, perc), x = perc)) +
+  geom_col(fill = aubergine) +
+  geom_text(aes(label = paste0(perc, '%')), hjust = -0.3, size = 5) +
+  labs(title = 'Percent of respondents by self-identified gender') +
+  xlim(c(0,60)) +
+  warwickplots:::theme_warwick(base_size = 14) +
+  theme(axis.title.x = element_blank(),
+        axis.title.y = element_blank(),
+        axis.text.x = element_blank(),
+        axis.text.y = element_text(size = 14),
+        panel.grid.minor = element_blank(),
+        panel.grid.major.y = element_blank())
+```
+
+:::
+
+::::
+
+[Data source: Pinto et al. 2018, DOI: [10.1109/SANER.2018.8330263](https://ieeexplore.ieee.org/document/8330263)]{.smaller70}
+
 
 ## Benefits of a diverse community
 
@@ -126,7 +238,27 @@ R Contribution Working Group est. July 2020
 - Exploring R's Bugzilla: <https://bugs.r-project.org>
 - Diagnosing bugs
 
-STATUS OF BUGS PLOT
+```{r}
+#| echo: false
+
+# script for bug_status.csv is "R/bug_status.R"
+bug_status <- read_csv("data/bug_status.csv", show_col_types = FALSE)
+ggplot(bug_status,
+       aes(x = reorder(Status, -`Number of bugs`), y = `Number of bugs`)) +
+    geom_bar(stat = "identity", fill = aubergine) +
+    labs(title = "Number of R bugs",
+         subtitle = "Grouped by status") +
+    geom_text(aes(label = `Number of bugs`), vjust = -0.45, size = 5) +
+    ylim(c(0,380)) +
+    warwickplots:::theme_warwick() +
+    theme(axis.title.x = element_blank(),
+          axis.title.y= element_blank(),
+          axis.text.y= element_blank(),
+          panel.grid.minor = element_blank(),
+          panel.grid.major.x = element_blank())
+
+```
+
 
 ## Related project: R Development Guide
 
@@ -146,6 +278,15 @@ Google Season of Docs: Expand and Reorganise the R Development Guide:
 :::
 
 ::::
+
+. . .
+
+::: {.callout-note}
+## New Google Summer of Code Proposals
+- [Track R translation status](https://github.com/rstats-gsoc/gsoc2023/wiki/Track%20R%20Translation%20Status)
+- [Converting R Journal latex documents to Rmarkdown with texor](https://github.com/rstats-gsoc/gsoc2023/wiki/Converting-R-Journal-latex-documents-to-Rmarkdown-with-texor)
+- [Containerized development environments for R](https://github.com/rstats-gsoc/gsoc2023/wiki/Containerized-Development-Environments-for-R)
+:::
 
 ## Campfire Topic: Localisation/translation
 
@@ -186,8 +327,132 @@ STATUS OF TRANSLATIONS PLOT
 
 ::::
 
+## Translatón/hackaton
+
+:::: {.columns}
+
+::: {.column width="50%"}
+![](images/translaton.png)
+:::
+
+::: {.column width="50%"}
+- LatinR, Oct 2022
+- 10 participants ~500 translations
+- Brazilian-Portuguese and Spanish
+- Connect people with experience in translation to first-timers
+- Plan for similar AsiaR hackathon
+
+:::
+
+::::
+
+## Bug BBQ
+
+:::: {.columns}
+
+::: {.column width="60%"}
+- Global, online, 24-hour event to work on open bugs.
+- ~20 participants, new and experienced - a good range
+  - [Good for collaboration, learning experience]{.smaller75}
+- 22 bugs identified for event
+  - [9 not addressed, 3 unresolved, 10 fixed or almost fixed]{.smaller75}
+  - [Good progress on bugs and prompt to act]{.smaller75}
+- No Collaborative Campfire attendees
+- [Full report](https://github.com/r-devel/rcontribution/blob/main/bug_bbq/Bug_BBQ_retrospective.md)
+
+:::
+
+::: {.column width="40%"}
+![This image was created by [Sciberia](https://www.scriberia.com) for The Turing Way community and is used under CC-BY license.](images/bug-catching.jpg)
+:::
+
+::::
+
+## R Project Sprint 2023
+
+- Collaborate on contributions to base R
+- ~50 participants, range of experience
+- A diverse group
+- Taking place at The University of Warwick, Aug 30--Sept 1st 2023
+- <https://contributor.r-project.org/r-project-sprint-2023/>
+- Will report after the event
+
+# Get involved {.inverse}
+
+## Slack
+
+<https://contributor.r-project.org/slack>
+
+A supportive space to foster the community of contributors to R core development:
+
+- Potential/novice contributors wanting support to get started/develop as contributors.
+- Experienced contributors and members of R Core willing to provide ad-hoc support.
+- Community organizers wanting to connect their communities with this initiative.
+
+::: {.notes}
+- It is a space to discuss coding issues, the wider development process and outreach initiatives.
+- Link gives more info about the group and how to join
+- Includes posting guide and CoC
+:::
+
+## R Contribution Working Group accounts
+
+Meetup: <https://www.meetup.com/r-contributors/>
+
+Mastodon: <https://hachyderm.io/@R_Contributors>
+
+Twitter: <https://twitter.com/R_Contributors>
+
+GitHub: <https://github.com/r-devel>
+
+::: {.notes}
+- Keeping up-to-date about events
+- Lead in to next slide about R Contribution Office Hours
+:::
 
 
+## R Contribution Office Hours
+
+:::: {.columns}
+
+::: {.column width="40%"}
+![](images/office-hours.png)
+:::
+
+::: {.column width="60%"}
+- Monthly, 2nd Thursday
+- Two time-zones (10am and 5pm UTC)
+- Informal opportunity to work on any aspect of contributing to R
+- Has led to [bug fixes](https://bugs.r-project.org/show_bug.cgi?id=16158)
+:::
+
+::::
+
+
+## C book club for R contributors 
+
+- For existing/aspiring R contributors that want to learn/refresh their C programming skills.
+- May 16th--Aug 22nd, online every two weeks on Tuesdays (**time TBC - FILL IN BEFORE TALK!**)
+- Main reading is [Modern C](https://gustedt.gitlabpages.inria.fr/modern-c/) by Jens Gustedt, supplemented by selected exercises from [C Programming: A Modern Approach](http://knking.com/books/c2/) by K. N. King.
+- Commitment ~2hrs a week
+- <https://github.com/r-devel/c-book-club/>
+
+::: {.notes}
+- Much of R is written in C
+- Originally conceived for R Sprint participants, but open to all
+- Modern C pdf freely available online
+- At the online meetings, one book club member will present a summary of the chapter (~10 minutes), reviewing the main points and highlighting any quotes/examples they found particularly helpful/important. This will be followed by discussion, sharing exercise solutions, etc. Book club members are encouraged to sign up to present at one session to spread the load among the group.
+:::
+
+## Upcoming events
+
+- R Contributor Office Hour: May 11th, June 8th
+- Bug BBQ - July 20th in Basel (TBC)
+- C book club - from May 16th
+
+::: {.notes}
+Recap of events mentioned above as final call to action
+:::
 
 ```{=html}
 <!-- needs to be last chunk of presentation otherwise creates an extra slide -->

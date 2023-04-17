@@ -3,8 +3,9 @@ library(forcats)
 library(ggplot2)
 library(lubridate)
 library(readr)
+library(warwickplots)
 
-bug_status <- read_csv("R/report-2022-06-15.csv")
+bug_status <- read_csv("data/2023-04-13-bug-status.csv")
 
 bug_status <- bug_status |>
     mutate(Status = factor(Status, levels = c("NEW", "UNCONFIRMED", "CONFIRMED",
@@ -12,17 +13,21 @@ bug_status <- bug_status |>
                            labels = c("New", "Unconfirmed", "Confirmed",
                                       "Assigned", "Reopened")))
 
+write_csv(bug_status, here::here("data/bug_status.csv"))
+
+aubergine <- warwick_palettes$aubergine[1]
+
 ggplot(bug_status,
        aes(x = Status, y = `Number of bugs`)) +
-    geom_bar(stat = "identity", fill = "steelblue") +
-    labs(x = NULL,
-         subtitle = "Status of R Bugs") +
+    geom_bar(stat = "identity", fill = aubergine) +
+    labs(title = "Number of R bugs",
+         subtitle = "Grouped by status") +
     scale_y_continuous(expand = c(0, 0)) +
-    theme_minimal() +
-    theme(axis.text.x = element_text(angle = 0, vjust = 0.5, hjust = 0.5,
-                                     size = 10),
-          legend.title=element_blank(),
-          plot.margin = margin(0.1, 0.5, 0.1, 0.5, "cm"))
+    warwickplots:::theme_warwick() +
+    theme(axis.title.x = element_blank(),
+          axis.title.y= element_blank(),
+          panel.grid.minor = element_blank(),
+          panel.grid.major.x = element_blank())
 
 tally_status <- message_status |>
     filter(!language %in% c("Persian", "English_GB", "English")) |>
