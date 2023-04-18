@@ -28,21 +28,20 @@ format:
 
 ## Sustainability
 
-:::: {.columns}
+Those who contributed the most to R early on are now near the end of their careers, only partially replaced by new contributors.
 
-::: {.column width="50%"}
-NEED CONTRIBUTOR PLOT
-:::
+```{r}
+#| fig.align: center
+knitr::include_graphics(here::here("figures", "r_core_commits.png"))
+```
 
-::: {.column width="50%"}
+
+::: {.notes}
 - Early on, strong group of heavy committers supported by wide group of regular committers
 - Heavy committers now towards end of their careers
 - Regular committers only partially replaced by new members
-- Similar for contributor community
-
+-Similar for developer community  
 :::
-
-::::
 
 ## Equality, Diversity & Inclusion (EDI)
 

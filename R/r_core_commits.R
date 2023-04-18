@@ -1,4 +1,6 @@
+# Analyses commits from R Core team based on
 # https://www.r-bloggers.com/2018/03/guide-to-tidy-git-analysis/
+
 # Parts 1 and 2
 library(tidyverse)
 library(glue)
@@ -9,21 +11,27 @@ library(tidygraph)
 library(ggraph)
 library(tidytext)
 
-system(glue('git log -3'))
+# Set path to local clone of https://github.com/r-devel/r-svn
+repo <- "/Users/u2175871/Library/CloudStorage/OneDrive-UniversityofWarwick/Rprojs/Others/r-devel_r-svn"
+
+## make sure up-to-date
+system(glue('git -C {repo} pull'))
+
+system(glue('git -C {repo} log -3'))
 
 log_format_options <- c(datetime = "cd", commit = "h", parents = "p",
                         author = "an", subject = "s")
 option_delim <- "\t"
 log_format   <- paste(glue("%{log_format_options}"), collapse = "\t")
 log_options  <- glue('--pretty=format:"{log_format}" --date=format:"%Y-%m-%d %H:%M:%S"')
-log_cmd      <- glue('git log {log_options}')
+log_cmd      <- glue('git -C {repo} log {log_options}')
 log_cmd
 
 system(glue('{log_cmd} -3'))
 
 history_logs <- system(log_cmd, intern = TRUE) %>%
     str_split_fixed(option_delim, length(log_format_options)) %>%
-    as_tibble() %>%
+    as_tibble(.name_repair = "minimal") %>%
     setNames(names(log_format_options))
 
 history_logs <- history_logs %>%
@@ -74,9 +82,8 @@ history_logs$year <- substr(history_logs$datetime, 1, 4)
 dat <- history_logs %>%
     count(name, year)
 
-#ggplot(history_logs, aes(x = year, fill = name)) +
-#    geom_bar(position = "stack")
-    
+ggplot(history_logs, aes(x = year, fill = name)) +
+    geom_bar(position = "stack")
 
 dat2 <- history_logs %>%
     group_by(year) %>%
@@ -95,9 +102,23 @@ dat3 <- history_logs %>%
     summarise(log_commits = log10(n()),
               commits = 10^log10(n()))
 
+year_seq <- seq(from = 1997, to = 2023, by = 2)
+
+dark_text <- "#2e2e2f"
+mid_text <-  "#4d4e4f"
+light_text <- "#747576"
+pale_text <- "#ebebeb"
+
 ggplot(dat3, aes(year, fct_rev(name))) +
     geom_tile(aes(fill = commits)) +
-    labs(x = NULL, y = NULL, subtitle = "Core Developer Commits 1997 - 2022") +
-    scale_fill_binned(type = "viridis", trans = "log10", limits=c(0.1,5000),
-                      breaks = c(0.1, 1, 10, 100, 1000)) +
-    theme(axis.text.x = element_text(angle = 90, vjust = 0.5))
+    labs(x = NULL, y = NULL, title = "Core Developer Commits 1997 - 2023") +
+    scale_fill_viridis_b(option = "plasma", trans = "log10", limits=c(0.1,5000),
+                      breaks = c(0.1, 1, 10, 100, 1000), labels = c("", "1", "10", "100", "1000"),
+                      direction = -1) +
+    scale_x_discrete(breaks = year_seq, labels = year_seq) +
+    warwickplots:::theme_warwick(base_size = 18) +
+    theme(axis.text.x = element_text(size = rel(0.8)),
+          axis.text.y = element_text(colour = dark_text),
+          legend.position = "right")
+
+ggsave("r_core_commits.png", path = here::here("figures"), device = "png", dpi = 320)
