@@ -9,7 +9,7 @@ format:
   warwickpres-revealjs: default
 ---
 
-## The R Project
+## The R Project {visibility="hidden"}
 
 :::: {.columns}
 
@@ -54,6 +54,7 @@ library(readr)
 library(ggplot2)
 library(ggtext)
 library(warwickplots)
+library(forcats)
 ```
 
 
@@ -75,7 +76,7 @@ aubergine <- warwick_palettes$aubergine[1]
 
 ```{r}
 #| echo: false
-ggplot(gender_perc, aes(x = reorder(gender, -perc), y = perc)) +
+ggplot(gender_perc, aes(x = fct_reorder(gender, -perc), y = perc)) +
     geom_col(fill = aubergine) +
     geom_text(aes(label = paste0(perc, '%')), vjust = -0.45, size = 5) +
     labs(title = 'Percent of respondents by self-identified gender') +
@@ -96,7 +97,7 @@ ggplot(gender_perc, aes(x = reorder(gender, -perc), y = perc)) +
 
 ```{r}
 #| echo: false
-ggplot(loc_perc, aes(x = reorder(location2, -perc), y = perc)) +
+ggplot(loc_perc, aes(x = fct_reorder(location2, -perc), y = perc)) +
   geom_col(fill = aubergine) +
   geom_text(aes(label = paste0(perc, '%')), vjust = -0.45, size = 5) +
   labs(title = 'Percent of respondents by self-identified region') +
@@ -126,6 +127,7 @@ library(readr)
 library(ggplot2)
 library(ggtext)
 library(warwickplots)
+library(forcats)
 ```
 
 
@@ -145,7 +147,7 @@ aubergine <- warwick_palettes$aubergine[1]
 ::: {.column width="50%"}
 ```{r}
 #| echo: false
-ggplot(gender_perc, aes(y = reorder(gender, perc), x = perc)) +
+ggplot(gender_perc, aes(y = fct_reorder(gender, perc), x = perc)) +
     geom_col(fill = aubergine) +
     geom_text(aes(label = paste0(perc, '%')), hjust = -0.3, size = 5) +
     labs(title = 'Percent of respondents by self-identified gender') +
@@ -165,7 +167,7 @@ ggplot(gender_perc, aes(y = reorder(gender, perc), x = perc)) +
 ::: {.column width="50%"}
 ```{r}
 #| echo: false
-ggplot(loc_perc, aes(y = reorder(location2, perc), x = perc)) +
+ggplot(loc_perc, aes(y = fct_reorder(location2, perc), x = perc)) +
   geom_col(fill = aubergine) +
   geom_text(aes(label = paste0(perc, '%')), hjust = -0.3, size = 5) +
   labs(title = 'Percent of respondents by self-identified gender') +
@@ -279,14 +281,6 @@ Google Season of Docs: Expand and Reorganise the R Development Guide:
 
 ::::
 
-. . .
-
-::: {.callout-note}
-## New Google Summer of Code Proposals
-- [Track R translation status](https://github.com/rstats-gsoc/gsoc2023/wiki/Track%20R%20Translation%20Status)
-- [Converting R Journal latex documents to Rmarkdown with texor](https://github.com/rstats-gsoc/gsoc2023/wiki/Converting-R-Journal-latex-documents-to-Rmarkdown-with-texor)
-- [Containerized development environments for R](https://github.com/rstats-gsoc/gsoc2023/wiki/Containerized-Development-Environments-for-R)
-:::
 
 ## Campfire Topic: Localisation/translation
 
@@ -307,6 +301,15 @@ STATUS OF TRANSLATIONS PLOT
 <https://contributor.r-project.org/translations>
 :::
 ::::
+
+. . .
+
+::: {.callout-note}
+## New Google Summer of Code Proposals
+- [Track R translation status](https://github.com/rstats-gsoc/gsoc2023/wiki/Track%20R%20Translation%20Status)
+- [Converting R Journal latex documents to Rmarkdown with texor](https://github.com/rstats-gsoc/gsoc2023/wiki/Converting-R-Journal-latex-documents-to-Rmarkdown-with-texor)
+- [Containerized development environments for R](https://github.com/rstats-gsoc/gsoc2023/wiki/Containerized-Development-Environments-for-R)
+:::
 
 ## Weblate
 
@@ -357,7 +360,6 @@ STATUS OF TRANSLATIONS PLOT
 - 22 bugs identified for event
   - [9 not addressed, 3 unresolved, 10 fixed or almost fixed]{.smaller75}
   - [Good progress on bugs and prompt to act]{.smaller75}
-- No Collaborative Campfire attendees
 - [Full report](https://github.com/r-devel/rcontribution/blob/main/bug_bbq/Bug_BBQ_retrospective.md)
 
 :::
@@ -373,9 +375,17 @@ STATUS OF TRANSLATIONS PLOT
 - Collaborate on contributions to base R
 - ~50 participants, range of experience
 - A diverse group
+- Several have engaged with past RCWG events and initiatives
 - Taking place at The University of Warwick, Aug 30--Sept 1st 2023
 - <https://contributor.r-project.org/r-project-sprint-2023/>
 - Will report after the event
+
+::: {.notes}
+- Diverse communities: RLadies, AfricaR, AsiaR, ArabR, RainbowR
+- Participants have engaged with Collaboration Campfires, Slack, Office Hours (more on those in a moment)
+:::
+
+
 
 # Get involved {.inverse}
 
@@ -432,7 +442,7 @@ GitHub: <https://github.com/r-devel>
 ## C book club for R contributors 
 
 - For existing/aspiring R contributors that want to learn/refresh their C programming skills.
-- May 16th--Aug 22nd, online every two weeks on Tuesdays (**time TBC - FILL IN BEFORE TALK!**)
+- May 16th--Aug 22nd, online every two weeks, 1-2pm BST Tuesdays
 - Main reading is [Modern C](https://gustedt.gitlabpages.inria.fr/modern-c/) by Jens Gustedt, supplemented by selected exercises from [C Programming: A Modern Approach](http://knking.com/books/c2/) by K. N. King.
 - Commitment ~2hrs a week
 - <https://github.com/r-devel/c-book-club/>
@@ -442,16 +452,18 @@ GitHub: <https://github.com/r-devel>
 - Originally conceived for R Sprint participants, but open to all
 - Modern C pdf freely available online
 - At the online meetings, one book club member will present a summary of the chapter (~10 minutes), reviewing the main points and highlighting any quotes/examples they found particularly helpful/important. This will be followed by discussion, sharing exercise solutions, etc. Book club members are encouraged to sign up to present at one session to spread the load among the group.
+- Possibly a second cohort 7-8pm PDT (3am BST!)
 :::
 
 ## Upcoming events
 
 - R Contributor Office Hour: May 11th, June 8th
-- Bug BBQ - July 20th in Basel (TBC)
+- Bug BBQ - July 20th online (TBC)
 - C book club - from May 16th
 
 ::: {.notes}
 Recap of events mentioned above as final call to action
+Bug NNQ may be hybrid with the in-person part in Basel
 :::
 
 ```{=html}

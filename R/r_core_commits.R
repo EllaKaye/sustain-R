@@ -13,7 +13,7 @@ system(glue('git log -3'))
 
 log_format_options <- c(datetime = "cd", commit = "h", parents = "p",
                         author = "an", subject = "s")
-
+option_delim <- "\t"
 log_format   <- paste(glue("%{log_format_options}"), collapse = "\t")
 log_options  <- glue('--pretty=format:"{log_format}" --date=format:"%Y-%m-%d %H:%M:%S"')
 log_cmd      <- glue('git log {log_options}')
@@ -74,8 +74,9 @@ history_logs$year <- substr(history_logs$datetime, 1, 4)
 dat <- history_logs %>%
     count(name, year)
 
-ggplot(history_logs, aes(x = year, fill = name)) +
-    geom_bar(position = "stack")
+#ggplot(history_logs, aes(x = year, fill = name)) +
+#    geom_bar(position = "stack")
+    
 
 dat2 <- history_logs %>%
     group_by(year) %>%
