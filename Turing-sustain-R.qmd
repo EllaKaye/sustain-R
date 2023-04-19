@@ -13,7 +13,7 @@ format:
 
 slides: <https://turing-sustain-r.netlify.app>
 
-repo: <https://github.com/EllaKaye/SatRday-sustain-R>
+repo: <https://github.com/EllaKaye/sustain-R>
 
 <br>
 
@@ -22,11 +22,12 @@ mastodon: [@R_contributors@hachyderm.io](https://hachyderm.io/@R_Contributors)
 twitter: [@R_contributors](https://twitter.com/R_Contributors)
 
 ::: {.notes}
-Add QR code? Zenodo ref? 
+- follow along/accessibility
+- Add QR code? Zenodo ref? 
 :::
 
 
-## The R Project {visibility="hidden"}
+## The R Project
 
 :::: {.columns}
 
@@ -37,11 +38,14 @@ Add QR code? Zenodo ref?
 ::: {.column width="70%"}
 - R is a programming language for statistical computing and data science
 - Originally developed by academics, now widely used across sectors and domains
-- Used for critical “production” applications (e.g., COVID-19 modelling), as well as prototyping
 - Core R project underpins >20,000 packages
 :::
 
 ::::
+
+::: {.notes}
+- also data visualisation
+:::
 
 ## Sustainability
 
@@ -57,7 +61,7 @@ knitr::include_graphics(here::here("figures", "r_core_commits.png"))
 - Early on, strong group of heavy committers supported by wide group of regular committers
 - Heavy committers now towards end of their careers
 - Regular committers only partially replaced by new members
--Similar for developer community  
+- Male, mostly global north -> developer community
 :::
 
 ## Equality, Diversity & Inclusion (EDI)
@@ -66,7 +70,7 @@ Diversity among maintainers of R packages on the CRAN repository
 
 :::: {.columns}
 
-::: {.column width="50%"}
+::: {.column width="60%"}
 ```{r}
 #| echo: false
 #| fig-align: "center"
@@ -76,7 +80,7 @@ knitr::include_graphics('figures/gender.png')
 
 :::
 
-::: {.column width="50%"}
+::: {.column width="60%"}
 ```{r}
 #| echo: false
 #| fig-align: "center"
@@ -104,28 +108,52 @@ knitr::include_graphics('figures/location.png')
 - Motivates a desire to contribute.
 :::
 
+::: {.notes}
+research has shown...  
+:::
+
 # Initiatives {.inverse}
+
+::: {.notes}
+How do we create or more diverse contributor base?  
+:::
 
 ## Building a diverse contributor community
 
-R Contribution Working Group est. July 2020
+**R Contribution Working Group** est. July 2020
 
 - Social media (Blog, Slack, Twitter, Mastodon)
 - Novice-friendly documentation
-- Short-term paid projects (GSoC, GSoD)
 - Events for novice contributors
+- Short-term paid projects (GSoC, GSoD)
 
 . . . 
 
 [Prioritising engagement with people from under-represented groups]{.larger150 .primary}
 
-## Collaboration Campfires
+::: {.notes}
+before moving to next slide:
+So, we want more contributors, but to do what?
+:::
+
+# {.inverse .center-h .middle}
+
+[**bugs**]{.larger200}
+
+<br>
+
+[**translations**]{.larger200}
+
+::: {.notes}
+Will talk about both, through how they were addressed at an RCWG initiative, Collaboration Campfire 
+:::
+
+## Example event: Collaboration Campfires
 
 :::: {.columns}
 
 ::: {.column width="60%"}
-- Code for Science & Society Digital Infrastructure Incubator project
-- Series of 90-minute sessions introducing ways to contribute
+- Series of four 90-minute sessions introducing ways to contribute
 - Informal, exploratory, interactive
 - Targeted outreach to people from underrepresented groups
 
@@ -137,7 +165,8 @@ R Contribution Working Group est. July 2020
 
 ::::
 
-## Campfire Topic: Bug Handling
+
+## Bug Handling
 
 - Exploring R's Bugzilla: <https://bugs.r-project.org>
 - Diagnosing bugs
@@ -149,27 +178,11 @@ knitr::include_graphics('figures/bug_status.png')
 ```
 
 
-## Related project: R Development Guide
-
-:::: {.columns}
-
-::: {.column width="30%"}
-![Logo [shared by Google](https://developers.google.com/terms/site-policies), [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/)](images/GSoD.png)
+::: {.notes}
+lots unconfirmed - confirming they are really bugs is something that novice contributors can do  
 :::
 
-::: {.column width="70%"}
-Google Season of Docs: Expand and Reorganise the R Development Guide:
-
-- <https://contributor.r-project.org/rdevguide/>
-- Overview of project and ways to contribute
-- GitHub workflow for testing patches
--- How to contribute translations
-:::
-
-::::
-
-
-## Campfire Topic: Localisation/translation
+## Localisation/translation
 
 - Exploring status of translations
 - Contributing translations
@@ -179,31 +192,36 @@ Google Season of Docs: Expand and Reorganise the R Development Guide:
 knitr::include_graphics("figures/translation_status.png")
 ```
 
-## Related project: Translation Dashboard
+::: {.notes}
+translations of messages
+Spanish is an interesting case, given large Spanish-speaking userbase
+:::
 
-**TODO: add screenshot (maybe instead of logo)**
+
+## Infrastructure: R Development Guide
 
 :::: {.columns}
 
 ::: {.column width="30%"}
-![Logo [shared by Google](https://developers.google.com/open-source/gsoc/resources/marketing), [CC BY-NC-ND 3.0](https://creativecommons.org/licenses/by-nc-nd/3.0/)](images/GSoC.png)
+![Logo [shared by Google](https://developers.google.com/terms/site-policies), [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/)](images/GSoD.png)
 :::
 
 ::: {.column width="70%"}
-<https://contributor.r-project.org/translations>
+Expand and Reorganise the R Development Guide:
+
+- <https://contributor.r-project.org/rdevguide/>
+- Overview of project and ways to contribute
+- GitHub workflow for testing patches
+- How to contribute translations
 :::
+
 ::::
 
-. . .
-
-::: {.callout-note}
-## New Google Summer of Code Proposals
-- [Track R translation status](https://github.com/rstats-gsoc/gsoc2023/wiki/Track%20R%20Translation%20Status)
-- [Converting R Journal latex documents to Rmarkdown with texor](https://github.com/rstats-gsoc/gsoc2023/wiki/Converting-R-Journal-latex-documents-to-Rmarkdown-with-texor)
-- [Containerized development environments for R](https://github.com/rstats-gsoc/gsoc2023/wiki/Containerized-Development-Environments-for-R)
+::: {.notes}
+If we want people to contribute, good to have infrastruce in place to guide that (as well as events)  
 :::
 
-## Weblate
+## Infrastructure: Weblate
 
 <https://translate.rx.studio>
 
@@ -222,7 +240,12 @@ knitr::include_graphics("figures/translation_status.png")
 
 ::::
 
-## Translatón/hackaton
+::: {.notes}
+Really easy to sign up for an account and translate a few messages, can be done in minutes
+Great way to get started with contributing if you speak another language (or UK English)
+:::
+
+## Translatón/hackaton {visibility="hidden"}
 
 :::: {.columns}
 
@@ -241,7 +264,7 @@ knitr::include_graphics("figures/translation_status.png")
 
 ::::
 
-## Bug BBQ
+## Bug BBQ {visibility="hidden"}
 
 :::: {.columns}
 
@@ -262,7 +285,7 @@ knitr::include_graphics("figures/translation_status.png")
 
 ::::
 
-## R Project Sprint 2023
+## Upcoming event: R Project Sprint 2023
 
 - Collaborate on contributions to base R
 - ~50 participants, range of experience
@@ -273,6 +296,7 @@ knitr::include_graphics("figures/translation_status.png")
 - Will report after the event
 
 ::: {.notes}
+- ~80 applications. Participants chosen for balance of experience, diversity, community leaders
 - Diverse communities: RLadies, AfricaR, AsiaR, ArabR, RainbowR
 - Participants have engaged with Collaboration Campfires, Slack, Office Hours (more on those in a moment)
 :::
@@ -281,11 +305,13 @@ knitr::include_graphics("figures/translation_status.png")
 
 # Get involved {.inverse}
 
-## Slack
+## Slack and Meetup
 
 <https://contributor.r-project.org/slack>
 
-A supportive space to foster the community of contributors to R core development:
+<https://www.meetup.com/r-contributors/>
+
+The Slack is a supportive space to foster the community of contributors to R core development:
 
 - Potential/novice contributors wanting support to get started/develop as contributors.
 - Experienced contributors and members of R Core willing to provide ad-hoc support.
@@ -296,16 +322,6 @@ A supportive space to foster the community of contributors to R core development
 - Link gives more info about the group and how to join
 - Includes posting guide and CoC
 :::
-
-## R Contribution Working Group accounts
-
-Meetup: <https://www.meetup.com/r-contributors/>
-
-Mastodon: <https://hachyderm.io/@R_Contributors>
-
-Twitter: <https://twitter.com/R_Contributors>
-
-GitHub: <https://github.com/r-devel>
 
 ::: {.notes}
 - Keeping up-to-date about events
@@ -322,7 +338,7 @@ GitHub: <https://github.com/r-devel>
 :::
 
 ::: {.column width="60%"}
-- Monthly, 2nd Thursday (May 11th, June 8th)
+- Monthly, 2nd Thursday (next two are May 11th, June 8th)
 - Two time-zones (10am and 5:30pm UTC)
 - Informal opportunity to work on any aspect of contributing to R
 - Has led to [bug fixes](https://bugs.r-project.org/show_bug.cgi?id=16158)
@@ -353,8 +369,9 @@ GitHub: <https://github.com/r-devel>
 
 
 ::: {.notes}
-Recap of events mentioned above as final call to action
-Bug NNQ may be hybrid with the in-person part in Basel
+- Feel free to get in touch with me or Heather or RCWG via Slack or social media 
+- links throughout this presentation - encourage you to explore
+- if only one, the above is the key URL
 :::
 
 ```{=html}

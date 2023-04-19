@@ -11,9 +11,9 @@ format:
 
 ## Presentation details
 
-slides: <https://ellakaye.github.io/SatRday-sustain-R/>
+slides: <https://satrday-sustain-r.netlify.app/>
 
-repo: <https://github.com/EllaKaye/SatRday-sustain-R>
+repo: <https://github.com/EllaKaye/sustain-R>
 
 <br>
 

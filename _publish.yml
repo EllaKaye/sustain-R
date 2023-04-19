@@ -1,4 +1,8 @@
 - source: Turing-sustain-R.qmd
   netlify:
     - id: 9b9bf8c6-396e-4efe-8e73-d68a82d3a02a
-      url: 'https://tourmaline-sprite-fb54fa.netlify.app'
+      url: 'https://turing-sustain-r.netlify.app'
+- source: 2023-04-22_SatRday-London_R-sustainability-EDI.qmd
+  netlify:
+    - id: 6b063903-2f07-4b75-b17b-3ac95b87213f
+      url: 'https://silly-pixie-7e0208.netlify.app'
