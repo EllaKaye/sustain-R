@@ -5,6 +5,7 @@ library(dplyr)
 library(forcats)
 library(ggplot2)
 library(readr)
+library(ggtext)
 
 ## new - from local update
 message_status <- read_csv("data/message_status.csv")
@@ -52,18 +53,39 @@ ggplot(tally_status,
 
 aubergine_pal <- warwickplots::warwick_palettes$aubergine
 
+
 #head(tally_status)
 # TODO: tweak axis text settings, ggtext instead of legend, reorder factor
-ggplot(tally_status,
-       aes(fill = group, y = fct_inorder(language), x = y)) +
+
+dark_text <- "#2e2e2f"
+mid_text <-  "#4d4e4f"
+light_text <- "#747576"
+pale_text <- "#ebebeb"
+
+# TODO: paler gray, lighter purple, legend
+tally_status %>%
+  mutate(group = fct_relevel(group, c("untranslated", "fuzzy", "translated"))) %>%
+ggplot(aes(fill = group, y = fct_inorder(language), x = y)) +
   geom_bar(stat = "identity", position = "stack") +
-  labs(x = NULL, y = NULL,
-       title = "Translation status in R") +
-  scale_fill_manual(values = c("#c4c4c4", aubergine_pal[1], aubergine_pal[4])) +
+  labs(x = NULL, 
+       y = NULL,
+       #title = "Translation status in R",
+       title = "Percent of <span style = 'color:#552D62;'>**translated**</span>,
+       <span style = 'color:#886C91;'>**fuzzy**</span> and <span style = 'color:#b0b0b1;'>**untranslated**</span> messages") +
+  scale_fill_manual(values = c("#b0b0b1", aubergine_pal[4], aubergine_pal[1])) +
   scale_x_continuous(expand = c(0, 0), labels = scales::label_percent()) +
-  warwickplots:::theme_warwick() +
-  theme(legend.title=element_blank(),
-        legend.position = "right")
+  warwickplots:::theme_warwick(base_size = 24) +
+  theme(legend.position = 'none',
+        axis.text.x = element_text(size = rel(1), colour = mid_text),
+        axis.text.y = element_text(size = rel(1), colour = mid_text),
+        plot.margin = margin(0.25, 0.75, 0.25, 0.25,"cm"),
+        plot.title = element_textbox_simple(size = rel(1.4),
+                                            margin = margin(12, 0, 12, 0)),
+        panel.grid = element_blank())
+
+ggsave("translation_status.png", path = here::here("figures"), device = "png", dpi = 320)
+ggsave("translation_status.svg", path = here::here("figures"), device = grDevices::svg())
+
 
 # language codes, ca case want to use short names
 c("zh_CN", "zh_TW", "da", "fr", "de", "it",

@@ -3,7 +3,7 @@ title: Sustainability and EDI (Equality, Diversity and Inclusion) in the R Proje
 author: 
   - name: Heather Turner and Ella Kaye
     affiliation: University of Warwick
-date: 2023-04-22
+date: 2023-04-20
 date-format: long
 format: 
   warwickpres-revealjs: default
@@ -11,7 +11,7 @@ format:
 
 ## Presentation details
 
-slides: <https://ellakaye.github.io/SatRday-sustain-R/>
+slides: <https://turing-sustain-r.netlify.app>
 
 repo: <https://github.com/EllaKaye/SatRday-sustain-R>
 

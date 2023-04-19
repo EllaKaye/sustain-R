@@ -10,6 +10,7 @@ library(forcats)
 library(tidygraph)
 library(ggraph)
 library(tidytext)
+library(warwickplots)
 
 # Set path to local clone of https://github.com/r-devel/r-svn
 repo <- "/Users/u2175871/Library/CloudStorage/OneDrive-UniversityofWarwick/Rprojs/Others/r-devel_r-svn"
@@ -109,6 +110,8 @@ mid_text <-  "#4d4e4f"
 light_text <- "#747576"
 pale_text <- "#ebebeb"
 
+#option = "plasma"
+
 ggplot(dat3, aes(year, fct_rev(name))) +
     geom_tile(aes(fill = commits)) +
     labs(x = NULL, y = NULL, title = "Core Developer Commits 1997 - 2023") +
@@ -116,9 +119,11 @@ ggplot(dat3, aes(year, fct_rev(name))) +
                       breaks = c(0.1, 1, 10, 100, 1000), labels = c("", "1", "10", "100", "1000"),
                       direction = -1) +
     scale_x_discrete(breaks = year_seq, labels = year_seq) +
-    warwickplots:::theme_warwick(base_size = 18) +
+  #scale_y_discrete(expand = c(0, 0.4)) +  
+  warwickplots:::theme_warwick(base_size = 18) +
     theme(axis.text.x = element_text(size = rel(0.8)),
           axis.text.y = element_text(colour = dark_text),
           legend.position = "right")
 
 ggsave("r_core_commits.png", path = here::here("figures"), device = "png", dpi = 320)
+ggsave("r_core_commits.svg", path = here::here("figures"), device = grDevices::svg())
