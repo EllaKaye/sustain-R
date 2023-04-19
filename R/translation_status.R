@@ -46,15 +46,20 @@ ggplot(tally_status,
           legend.title=element_blank(),
           plot.margin = margin(0.1, 0.4, 0.1, 0.4, "cm"))
 
+
+
 # Ella's redo
+
+aubergine_pal <- warwickplots::warwick_palettes$aubergine
+
 #head(tally_status)
-# TODO: change colours, tweak axis text settings, ggtext instead of legend
+# TODO: tweak axis text settings, ggtext instead of legend, reorder factor
 ggplot(tally_status,
        aes(fill = group, y = fct_inorder(language), x = y)) +
   geom_bar(stat = "identity", position = "stack") +
   labs(x = NULL, y = NULL,
        title = "Translation status in R") +
-  scale_fill_manual(values = c("grey", "steelblue", "orange")) +
+  scale_fill_manual(values = c("#c4c4c4", aubergine_pal[1], aubergine_pal[4])) +
   scale_x_continuous(expand = c(0, 0), labels = scales::label_percent()) +
   warwickplots:::theme_warwick() +
   theme(legend.title=element_blank(),
