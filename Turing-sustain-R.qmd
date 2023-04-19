@@ -70,7 +70,7 @@ Diversity among maintainers of R packages on the CRAN repository
 
 :::: {.columns}
 
-::: {.column width="60%"}
+::: {.column width="50%"}
 ```{r}
 #| echo: false
 #| fig-align: "center"
@@ -80,7 +80,7 @@ knitr::include_graphics('figures/gender.png')
 
 :::
 
-::: {.column width="60%"}
+::: {.column width="50%"}
 ```{r}
 #| echo: false
 #| fig-align: "center"
