@@ -5,4 +5,8 @@
 - source: 2023-04-22_SatRday-London_R-sustainability-EDI.qmd
   netlify:
     - id: 6b063903-2f07-4b75-b17b-3ac95b87213f
-      url: 'https://silly-pixie-7e0208.netlify.app'
+      url: 'https://satrday-sustain-r.netlify.app'
+- source: rse-midlands-sustain-r.qmd
+  netlify:
+    - id: 999812ee-564b-46ad-9d31-cecd942530ca
+      url: 'https://rse-midlands-sustain-r.netlify.app'
