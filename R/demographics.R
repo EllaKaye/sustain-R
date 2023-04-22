@@ -70,32 +70,34 @@ ggplot(gender_perc, aes(y = fct_reorder(gender, perc), x = perc)) +
         axis.title.y = element_blank(),
         axis.text.x = element_blank(),
         axis.text.y = element_text(colour = mid_text, size = rel(1)),
-        panel.grid.minor = element_blank(),
-        panel.grid.major.y = element_blank())
+        panel.grid = element_blank())
 
 ggsave("gender.png", path = here::here("figures"), device = "png", dpi = 320)
 
 ## location plot
 
-loc_perc
+# loc_perc
+# 
+# loc_perc <- df %>%
+#   group_by(location) %>%
+#   summarise(n = n()) %>%
+#   mutate(perc = (round(n / sum(n), 3)*100)) %>% 
+#   arrange(desc(perc)) %>% 
+#   ungroup()
+# 
+# loc_perc <- loc_perc %>%
+#     mutate(location2 = factor(location,
+#                              levels = c("Europe", "North America", "Asia",
+#                                         "South America", "Oceania", "Africa",
+#                                         "Central America"),
+#                              labels = c("Europe", "North America", "Asia",
+#                                         "South America", "Oceania", "Africa",
+#                                         "Central America")))
+# 
+# write_csv(loc_perc, here::here("data", "loc_perc.csv"))
 
-loc_perc <- df %>%
-  group_by(location) %>%
-  summarise(n = n()) %>%
-  mutate(perc = (round(n / sum(n), 3)*100)) %>% 
-  arrange(desc(perc)) %>% 
-  ungroup()
+loc_perc <- read_csv(here::here("data", "loc_perc.csv"))
 
-loc_perc <- loc_perc %>%
-    mutate(location2 = factor(location,
-                             levels = c("Europe", "North America", "Asia",
-                                        "South America", "Oceania", "Africa",
-                                        "Central America"),
-                             labels = c("Europe", "North America", "Asia",
-                                        "South America", "Oceania", "Africa",
-                                        "Central America")))
-
-write_csv(loc_perc, here::here("data", "loc_perc.csv"))
 
 # ggplot(loc_perc, aes(x = reorder(location2, -perc), y = perc)) +
 #   geom_col(fill = aubergine) +
@@ -130,8 +132,7 @@ ggplot(loc_perc, aes(y = fct_reorder(location2, perc), x = perc)) +
         axis.title.y = element_blank(),
         axis.text.x = element_blank(),
         axis.text.y = element_text(size = rel(1), colour = mid_text),
-        panel.grid.minor = element_blank(),
-        panel.grid.major.y = element_blank())
+        panel.grid = element_blank())
 
 ggsave("location.png", path = here::here("figures"), device = "png", dpi = 320)
 
