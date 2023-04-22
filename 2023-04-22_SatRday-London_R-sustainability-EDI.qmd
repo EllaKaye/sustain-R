@@ -69,22 +69,19 @@ Diversity among maintainers of R packages on the CRAN repository
 :::: {.columns}
 
 ::: {.column width="50%"}
-```{r}
+```{r, out.width = "90%"}
 #| echo: false
 #| fig-align: "center"
 knitr::include_graphics('figures/gender.png')
 ```
-
-
 :::
 
 ::: {.column width="50%"}
-```{r}
+```{r, out.width = "90%"}
 #| echo: false
 #| fig-align: "center"
 knitr::include_graphics('figures/location.png')
 ```
-
 :::
 
 ::::
@@ -112,12 +109,14 @@ knitr::include_graphics('figures/location.png')
 
 R Contribution Working Group est. July 2020
 
-- Social media (Blog, Slack, Twitter, Mastodon)
+- Social media (Slack, Twitter, Mastodon)
 - Novice-friendly documentation
 - Short-term paid projects (GSoC, GSoD)
 - Events for novice contributors
 
+::: {.fragment}
 [Prioritising engagement with people from under-represented groups]{.larger150 .primary}
+:::
 
 ::: {.notes}
 before moving to next slide:
@@ -205,23 +204,24 @@ Could maybe skip this slide?
 
 :::: {.columns}
 
-::: {.column width="30%"}
-![Logo [shared by Google](https://developers.google.com/terms/site-policies), [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/)](images/GSoD.png)
+::: {.column width="60%"}
+![](figures/r_dev_guide.png)
 :::
 
-::: {.column width="70%"}
-Expand and Reorganise the R Development Guide:
+::: {.column width="40%"}
+<https://contributor.r-project.org/rdevguide/>
 
-- <https://contributor.r-project.org/rdevguide/>
-- Overview of project and ways to contribute
-- GitHub workflow for testing patches
--- How to contribute translations
+* Novice-friendly
+* Initial focus on established workflows for bugs & translations
+* Recent/ongoing:
+    - Further topics
+    - Alternative workflows
 :::
 
 ::::
 
 ::: {.notes}
-If we want people to contribute, good to have infrastruce in place to guide that (as well as events)  
+If we want people to contribute, good to have infrastructure in place to guide that (as well as events)  
 :::
 
 ## Infrastructure: Weblate
