@@ -172,7 +172,7 @@ Will talk about both, in the context of both events and infrastructure
 
 <https://bugs.r-project.org>
 
-- Exploring R's Bugzilla:
+- Exploring R's Bugzilla
 - Reviewing bugs
 
 ```{r}
