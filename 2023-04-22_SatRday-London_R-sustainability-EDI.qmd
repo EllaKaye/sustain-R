@@ -156,7 +156,7 @@ Will talk about both, in the context of both events and infrastructure
 ## Campfire Topic: Bug Handling
 
 - Exploring R's Bugzilla: <https://bugs.r-project.org>
-- Diagnosing bugs
+- Reviewing bugs
 
 ```{r}
 #| echo: false
