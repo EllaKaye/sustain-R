@@ -6,6 +6,7 @@ library(forcats)
 library(ggplot2)
 library(readr)
 library(ggtext)
+library(tidyr)
 
 ## new - from local update
 message_status <- read_csv("data/message_status.csv")
@@ -51,6 +52,11 @@ ggplot(tally_status,
 
 # Ella's redo
 
+tally_status <- tally_status %>%
+  mutate(group = fct_relevel(group, c("untranslated", "fuzzy", "translated")))
+
+readr::write_csv(tally_status, here::here("data", "tally_status.csv"))
+
 aubergine_pal <- warwickplots::warwick_palettes$aubergine
 
 
@@ -62,23 +68,23 @@ mid_text <-  "#4d4e4f"
 light_text <- "#747576"
 pale_text <- "#ebebeb"
 
-# TODO: paler gray, lighter purple, legend
-tally_status %>%
-  mutate(group = fct_relevel(group, c("untranslated", "fuzzy", "translated"))) %>%
-ggplot(aes(fill = group, y = fct_inorder(language), x = y)) +
+
+  
+  
+ggplot(tally_status, aes(fill = group, y = fct_inorder(language), x = y)) +
   geom_bar(stat = "identity", position = "stack") +
   labs(x = NULL, 
        y = NULL,
        #title = "Translation status in R",
        title = "Percent of <span style = 'color:#552D62;'>**translated**</span>,
-       <span style = 'color:#886C91;'>**fuzzy**</span> and <span style = 'color:#b0b0b1;'>**untranslated**</span> messages") +
-  scale_fill_manual(values = c("#b0b0b1", aubergine_pal[4], aubergine_pal[1])) +
+       <span style = 'color:#886C91;'>**fuzzy**</span> and <span style = 'color:#c4c4c4;'>**untranslated**</span> messages") +
+  scale_fill_manual(values = c("#c4c4c4", aubergine_pal[5], aubergine_pal[1])) +
   scale_x_continuous(expand = c(0, 0), labels = scales::label_percent()) +
   warwickplots:::theme_warwick(base_size = 24) +
   theme(legend.position = 'none',
         axis.text.x = element_text(size = rel(1), colour = mid_text),
         axis.text.y = element_text(size = rel(1), colour = mid_text),
-        plot.margin = margin(0.25, 0.75, 0.25, 0.25,"cm"),
+        plot.margin = margin(0.25, 1.2, 0.25, 0.25,"cm"),
         plot.title = element_textbox_simple(size = rel(1.4),
                                             margin = margin(12, 0, 12, 0)),
         panel.grid = element_blank())

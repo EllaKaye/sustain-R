@@ -11,6 +11,9 @@ format:
 
 ## Presentation details
 
+:::: {.columns}
+
+::: {.column width="70%"}
 slides: <https://satrday-sustain-r.netlify.app/>
 
 repo: <https://github.com/EllaKaye/sustain-R>
@@ -20,6 +23,17 @@ repo: <https://github.com/EllaKaye/sustain-R>
 mastodon: [@R_contributors@hachyderm.io](https://hachyderm.io/@R_Contributors)
 
 twitter: [@R_contributors](https://twitter.com/R_Contributors)
+:::
+
+::: {.column width="30%"}
+![](images/slides-url)
+:::
+
+::::
+
+
+
+
 
 ::: {.notes}
 - follow along/accessibility
@@ -71,8 +85,35 @@ Diversity among maintainers of R packages on the CRAN repository
 ::: {.column width="50%"}
 ```{r}
 #| echo: false
+#| eval: true
 #| fig-align: "center"
 knitr::include_graphics('figures/gender.png')
+```
+
+
+```{r}
+#| echo: false
+#| eval: false
+library(ggplot2)
+library(warwickplots)
+gender_perc <- read.csv(here::here("data", "gender_perc.csv"))
+aubergine <- warwick_palettes$aubergine[1]
+dark_text <- "#2e2e2f"
+mid_text <-  "#4d4e4f"
+light_text <- "#747576"
+pale_text <- "#ebebeb"
+ggplot(gender_perc, aes(y = fct_reorder(gender, perc), x = perc)) +
+  geom_col(fill = aubergine) +
+  geom_text(aes(label = paste0(perc, '%')), hjust = -0.3, size = 12, colour = mid_text) +
+  labs(title = 'Percent of respondents by self-identified gender') +
+  xlim(c(0,110)) +
+  warwickplots:::theme_warwick(base_size = 36) +
+  theme(axis.title.x = element_blank(),
+        axis.title.y = element_blank(),
+        axis.text.x = element_blank(),
+        axis.text.y = element_text(colour = mid_text, size = rel(1)),
+        panel.grid.minor = element_blank(),
+        panel.grid.major.y = element_blank())
 ```
 
 
@@ -176,6 +217,7 @@ lots unconfirmed - confirming they are really bugs is something that novice cont
 
 ```{r}
 #| fig-align: "center"
+#| eval: true
 knitr::include_graphics("figures/translation_status.png")
 ```
 
