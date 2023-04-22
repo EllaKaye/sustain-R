@@ -150,22 +150,26 @@ Will talk about infrastructure
 
 ## R Development Guide
 
+<https://contributor.r-project.org/rdevguide/>
+
 :::: {.columns}
 
-::: {.column width="30%"}
-![Logo [shared by Google](https://developers.google.com/terms/site-policies), [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/)](images/GSoD.png)
+::: {.column width="60%"}
+![](figures/r_dev_guide.png)
 :::
 
-::: {.column width="70%"}
-Expand and Reorganise the R Development Guide:
+::: {.column width="40%"}
 
-- <https://contributor.r-project.org/rdevguide/>
-- Overview of project and ways to contribute
-- GitHub workflow for testing patches
-- How to contribute translations
+
+* Novice-friendly
+* Initial focus on established workflows for bugs & translations
+* Recent/ongoing:
+    - Further topics
+    - Alternative workflows
 :::
 
 ::::
+
 
 ::: {.notes}
 If we want people to contribute, good to have infrastruce in place to guide that (as well as events)  

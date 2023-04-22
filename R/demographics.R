@@ -69,7 +69,7 @@ ggplot(gender_perc, aes(y = fct_reorder(gender, perc), x = perc)) +
   theme(axis.title.x = element_blank(),
         axis.title.y = element_blank(),
         axis.text.x = element_blank(),
-        axis.text.y = element_text(colour = mid_text, size = rel(1)),
+        axis.text.y = element_text(colour = dark_text, size = rel(1.2)),
         panel.grid = element_blank())
 
 ggsave("gender.png", path = here::here("figures"), device = "png", dpi = 320)
@@ -131,7 +131,7 @@ ggplot(loc_perc, aes(y = fct_reorder(location2, perc), x = perc)) +
   theme(axis.title.x = element_blank(),
         axis.title.y = element_blank(),
         axis.text.x = element_blank(),
-        axis.text.y = element_text(size = rel(1), colour = mid_text),
+        axis.text.y = element_text(size = rel(1.2), colour = dark_text),
         panel.grid = element_blank())
 
 ggsave("location.png", path = here::here("figures"), device = "png", dpi = 320)

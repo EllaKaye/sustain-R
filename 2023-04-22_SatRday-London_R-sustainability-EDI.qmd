@@ -83,7 +83,7 @@ Diversity among maintainers of R packages on the CRAN repository
 :::: {.columns}
 
 ::: {.column width="50%"}
-```{r, out.width = "90%"}
+```{r, out.width = "100%"}
 #| echo: false
 #| eval: true
 #| fig-align: "center"
@@ -92,7 +92,7 @@ knitr::include_graphics('figures/gender.png')
 :::
 
 ::: {.column width="50%"}
-```{r, out.width = "90%"}
+```{r, out.width = "100%"}
 #| echo: false
 #| fig-align: "center"
 knitr::include_graphics('figures/location.png')
